@@ -83,11 +83,11 @@ class paramScraper():
     def load(cls, file):
         data = json.load(open(file))
         if data.__contains__('template'):
-            cls.template = data['template']
+            cls.template = copy.deepcopy(data['template'])
         else:
             raise AttributeError("Unable to locate params template in json file!")
         if data.__contains__('params'):
-            cls.params = data['params']
+            cls.params = copy.deepcopy(data['params'])
         else:
             raise AttributeError("Unable to locate params in json file!")
 
