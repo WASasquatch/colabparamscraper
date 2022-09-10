@@ -73,7 +73,7 @@ class paramScraper():
                 if self.globals.__contains__(k):
                     self.updateParams(k, self.globals[k])
                     
-       def dump(self, file=None):
+    def dump(self, file=None):
         filename = file if file else f'{time.time()}_params.json'
         out = {'params': self.params, 'template': self.template}
         with open(filename, 'w', encoding='utf-8') as f:
