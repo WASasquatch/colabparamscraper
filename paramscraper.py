@@ -1,4 +1,4 @@
-import copy
+import copy, json, time
 
 class paramScraper():
 
@@ -72,3 +72,22 @@ class paramScraper():
             for k in self.template.keys():
                 if self.globals.__contains__(k):
                     self.updateParams(k, self.globals[k])
+                    
+       def dump(self, file=None):
+        filename = file if file else f'{time.time()}_params.json'
+        out = {'params': self.params, 'template': self.template}
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(out, f, ensure_ascii=False, indent=4)
+
+    @classmethod
+    def load(cls, file):
+        data = json.load(open(file))
+        if data.__contains__('template'):
+            cls.template = data['template']
+        else:
+            raise AttributeError("Unable to locate params template in json file!")
+        if data.__contains__('params'):
+            cls.params = data['params']
+        else:
+            raise AttributeError("Unable to locate params in json file!")
+
