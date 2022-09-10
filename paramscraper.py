@@ -56,15 +56,12 @@ class paramScraper():
             if cls.template.__contains__(param):
                 cls.params[param] = copy.deepcopy(value)
 
-    def scrape(self, settingsType=None):
-        from pprint import pprint
-        print('Printing globals')
-        pprint(globals())
+    def scrape(self, globals, settingsType=None):
         if settingsType is not None and self.template:
             for k in self.template[settingsType].keys():
-                if globals().__contains__(k):
-                    self.updateParams(k, globals()[k], settingsType)
+                if globals.__contains__(k):
+                    self.updateParams(k, globals[k], settingsType)
         else:
             for k in self.template.keys():
-                if globals().__contains__(k):
-                    self.updateParams(k, globals()[k])
+                if globals.__contains__(k):
+                    self.updateParams(k, globals[k])
