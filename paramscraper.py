@@ -57,6 +57,9 @@ class paramScraper():
                 cls.params[param] = copy.deepcopy(value)
 
     def scrape(self, settingsType=None):
+        from pprint import pprint
+        print('Printing globals')
+        pprint(globals())
         if settingsType is not None and self.template:
             for k in self.template[settingsType].keys():
                 if globals().__contains__(k):
