@@ -2,7 +2,8 @@ import copy
 
 class paramScraper():
 
-    def __init__(self, template):
+    def __init__(self, template, globals):
+        self.updateGlobals(globals)
         self.reset(template)
 
     @classmethod
@@ -55,13 +56,19 @@ class paramScraper():
         else:
             if cls.template.__contains__(param):
                 cls.params[param] = copy.deepcopy(value)
+                
+    @classmethod
+    def updateGlobals(cls, globals):
+        if globals and type(globals) is dict:
+            if len(globals) > 0:
+                cls.globals = globals
 
-    def scrape(self, globals, settingsType=None):
+    def scrape(self, settingsType=None):
         if settingsType is not None and self.template:
             for k in self.template[settingsType].keys():
-                if globals.__contains__(k):
-                    self.updateParams(k, globals[k], settingsType)
+                if cls.globals.__contains__(k):
+                    self.updateParams(k, cls.globals[k], settingsType)
         else:
             for k in self.template.keys():
-                if globals.__contains__(k):
-                    self.updateParams(k, globals[k])
+                if cls.globals.__contains__(k):
+                    self.updateParams(k, cls.globals[k])
