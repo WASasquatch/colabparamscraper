@@ -3,7 +3,8 @@
 
 ### Installation
 
-Install with git clone
+Install with git clone:
+
 `git clone https://github.com/WASasquatch/colabparamscraper`
 
 ### Example Usage
