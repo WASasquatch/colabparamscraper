@@ -66,9 +66,9 @@ class paramScraper():
     def scrape(self, settingsType=None):
         if settingsType is not None and self.template:
             for k in self.template[settingsType].keys():
-                if cls.globals.__contains__(k):
-                    self.updateParams(k, cls.globals[k], settingsType)
+                if self.globals.__contains__(k):
+                    self.updateParams(k, self.globals[k], settingsType)
         else:
             for k in self.template.keys():
-                if cls.globals.__contains__(k):
-                    self.updateParams(k, cls.globals[k])
+                if self.globals.__contains__(k):
+                    self.updateParams(k, self.globals[k])
